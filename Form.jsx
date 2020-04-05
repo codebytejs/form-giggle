@@ -11,6 +11,14 @@ export default class componentName extends Component {
         errorMsg: {}
       }
 
+      validateForm = () => {
+        const {usernameValid, emailValid, passwordValid, passwordConfirmValid} = this.state;
+        this.setState({
+          formValid: usernameValid && emailValid && passwordValid && passwordConfirmValid
+        })
+      }
+    
+
   render() {
     return (
         <div className='form'>
