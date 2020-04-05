@@ -3,96 +3,100 @@ import ValidationMessage from './ValidateMessages'
 import './form.css';
 export default class componentName extends Component {
 
-    state = {
-        username: '', usernameValid: false,
-        email: '', emailValid: false,
-        password: '', passwordValid: false,
-        passwordConfirm: '', passwordConfirmValid: false,
-        formValid: false,
-        errorMsg: {}
-      }
+  state = {
+    username: '', usernameValid: false,
+    email: '', emailValid: false,
+    password: '', passwordValid: false,
+    passwordConfirm: '', passwordConfirmValid: false,
+    formValid: false,
+    errorMsg: {}
+  }
 
-      validateForm = () => {
-        const {usernameValid, emailValid, passwordValid, passwordConfirmValid} = this.state;
-        this.setState({
-          formValid: usernameValid && emailValid && passwordValid && passwordConfirmValid
-        })
-      }
-    
-      validateUsername = () => {
-        const {username} = this.state;
-        let usernameValid = true;
-        let errorMsg = {...this.state.errorMsg}
-    
-        if (username.length < 3) {
-          usernameValid = false;
-          errorMsg.username = 'Must be at least 3 characters long'
-        }
-    
-        this.setState({usernameValid, errorMsg}, this.validateForm)
-      }
-    
-      updateEmail = (email) => {
-        this.setState({email}, this.validateEmail)
-      }
-    
-      validateEmail = () => {
-        const {email} = this.state;
-        let emailValid = true;
-        let errorMsg = {...this.state.errorMsg}
-    
-        // checks for format _@_._
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-          emailValid = false;
-          errorMsg.email = 'Invalid email format'
-        }
-    
-        this.setState({emailValid, errorMsg}, this.validateForm)
-      }
-    
-      updatePassword = (password) => {
-        this.setState({password}, this.validatePassword);
-      }
-    
-      validatePassword = () => {
-        const {password} = this.state;
-        let passwordValid = true;
-        let errorMsg = {...this.state.errorMsg}
-    
-        // must be 6 chars
-        // must contain a number
-        // must contain a special character
-    
-        if (password.length < 6) {
-          passwordValid = false;
-          errorMsg.password = 'Password must be at least 6 characters long';
-        } else if (!/\d/.test(password)){
-          passwordValid = false;
-          errorMsg.password = 'Password must contain a digit';
-        } else if (!/[!@#$%^&*]/.test(password)){
-          passwordValid = false;
-          errorMsg.password = 'Password must contain special character: !@#$%^&*';
-        }
-    
-        this.setState({passwordValid, errorMsg}, this.validateForm);
-      }
-    
-      updatePasswordConfirm = (passwordConfirm) => {
-        this.setState({passwordConfirm}, this.validatePasswordConfirm)
-      }
+  validateForm = () => {
+    const {usernameValid, emailValid, passwordValid, passwordConfirmValid} = this.state;
+    this.setState({
+      formValid: usernameValid && emailValid && passwordValid && passwordConfirmValid
+    })
+  }
 
-      validatePasswordConfirm = () => {
-        const {passwordConfirm, password} = this.state;
-        let passwordConfirmValid = true;
-        let errorMsg = {...this.state.errorMsg}
-    
-        if (password !== passwordConfirm) {
-          passwordConfirmValid = false;
-          errorMsg.passwordConfirm = 'Passwords do not match'
-        }
-    
-        this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
-      }
+  updateUsername = (username) => {
+    this.setState({username}, this.validateUsername)
+  }
+
+  validateUsername = () => {
+    const {username} = this.state;
+    let usernameValid = true;
+    let errorMsg = {...this.state.errorMsg}
+
+    if (username.length < 3) {
+      usernameValid = false;
+      errorMsg.username = 'Must be at least 3 characters long'
+    }
+
+    this.setState({usernameValid, errorMsg}, this.validateForm)
+  }
+
+  updateEmail = (email) => {
+    this.setState({email}, this.validateEmail)
+  }
+
+  validateEmail = () => {
+    const {email} = this.state;
+    let emailValid = true;
+    let errorMsg = {...this.state.errorMsg}
+
+    // checks for format _@_._
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      emailValid = false;
+      errorMsg.email = 'Invalid email format'
+    }
+
+    this.setState({emailValid, errorMsg}, this.validateForm)
+  }
+
+  updatePassword = (password) => {
+    this.setState({password}, this.validatePassword);
+  }
+
+  validatePassword = () => {
+    const {password} = this.state;
+    let passwordValid = true;
+    let errorMsg = {...this.state.errorMsg}
+
+    // must be 6 chars
+    // must contain a number
+    // must contain a special character
+
+    if (password.length < 6) {
+      passwordValid = false;
+      errorMsg.password = 'Password must be at least 6 characters long';
+    } else if (!/\d/.test(password)){
+      passwordValid = false;
+      errorMsg.password = 'Password must contain a digit';
+    } else if (!/[!@#$%^&*]/.test(password)){
+      passwordValid = false;
+      errorMsg.password = 'Password must contain special character: !@#$%^&*';
+    }
+
+    this.setState({passwordValid, errorMsg}, this.validateForm);
+  }
+
+  updatePasswordConfirm = (passwordConfirm) => {
+    this.setState({passwordConfirm}, this.validatePasswordConfirm)
+  }
+
+  validatePasswordConfirm = () => {
+    const {passwordConfirm, password} = this.state;
+    let passwordConfirmValid = true;
+    let errorMsg = {...this.state.errorMsg}
+
+    if (password !== passwordConfirm) {
+      passwordConfirmValid = false;
+      errorMsg.passwordConfirm = 'Passwords do not match'
+    }
+
+    this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
+  }
 
   render() {
     return (
