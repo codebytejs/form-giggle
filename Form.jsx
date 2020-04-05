@@ -18,6 +18,67 @@ export default class componentName extends Component {
         })
       }
     
+      validateUsername = () => {
+        const {username} = this.state;
+        let usernameValid = true;
+        let errorMsg = {...this.state.errorMsg}
+    
+        if (username.length < 3) {
+          usernameValid = false;
+          errorMsg.username = 'Must be at least 3 characters long'
+        }
+    
+        this.setState({usernameValid, errorMsg}, this.validateForm)
+      }
+    
+      updateEmail = (email) => {
+        this.setState({email}, this.validateEmail)
+      }
+    
+      validateEmail = () => {
+        const {email} = this.state;
+        let emailValid = true;
+        let errorMsg = {...this.state.errorMsg}
+    
+        // checks for format _@_._
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+          emailValid = false;
+          errorMsg.email = 'Invalid email format'
+        }
+    
+        this.setState({emailValid, errorMsg}, this.validateForm)
+      }
+    
+      updatePassword = (password) => {
+        this.setState({password}, this.validatePassword);
+      }
+    
+      validatePassword = () => {
+        const {password} = this.state;
+        let passwordValid = true;
+        let errorMsg = {...this.state.errorMsg}
+    
+        // must be 6 chars
+        // must contain a number
+        // must contain a special character
+    
+        if (password.length < 6) {
+          passwordValid = false;
+          errorMsg.password = 'Password must be at least 6 characters long';
+        } else if (!/\d/.test(password)){
+          passwordValid = false;
+          errorMsg.password = 'Password must contain a digit';
+        } else if (!/[!@#$%^&*]/.test(password)){
+          passwordValid = false;
+          errorMsg.password = 'Password must contain special character: !@#$%^&*';
+        }
+    
+        this.setState({passwordValid, errorMsg}, this.validateForm);
+      }
+    
+      updatePasswordConfirm = (passwordConfirm) => {
+        this.setState({passwordConfirm}, this.validatePasswordConfirm)
+      }
 
   render() {
     return (
