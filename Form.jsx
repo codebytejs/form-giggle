@@ -80,6 +80,19 @@ export default class componentName extends Component {
         this.setState({passwordConfirm}, this.validatePasswordConfirm)
       }
 
+      validatePasswordConfirm = () => {
+        const {passwordConfirm, password} = this.state;
+        let passwordConfirmValid = true;
+        let errorMsg = {...this.state.errorMsg}
+    
+        if (password !== passwordConfirm) {
+          passwordConfirmValid = false;
+          errorMsg.passwordConfirm = 'Passwords do not match'
+        }
+    
+        this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
+      }
+
   render() {
     return (
         <div className='form'>
