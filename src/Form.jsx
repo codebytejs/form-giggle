@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import ValidationMessage from './ValidateMessages'
 export default class componentName extends Component {
 
     state = {
